@@ -22,7 +22,6 @@ Dependencies
 * | deploy servlet v3.0 container,
   * & you use server push features -> able to use asynchronous I/O functionality / improve scalability 
 
-
 Building
 --------
 
@@ -105,3 +104,7 @@ Maven
       </dependency>
 
   ```
+
+Changelog
+-----
+* [here](overview.html)
