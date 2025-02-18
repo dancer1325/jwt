@@ -5,57 +5,62 @@
 
 == Introduction
 
-JWt is a Java library for developing web applications. The library
-uses the standard Java Servlet infrastructure, and therefore, a JWt
-web application may be deployed in existing
-link:https://en.wikipedia.org/wiki/Web_container[servlet containers] or
-JEE web application servers.
+* JWt
+  ** -- uses the -- standard Java Servlet infrastructure
+    *** -> JWt web application can be deployed |
+      **** servlet containers or
+      **** JEE web application servers
+  ** provides
+    *** abstraction of MANY web-specific implementation details
+  ** rendering strategy -- based on the -- browser's capabilities (AJAX or plain HTML)
+  ** supports
+    *** web semantics : URLs, bookmarks, and forward/backward navigation
+    *** search engine interoperability
 
-The API is widget-centric, and inspired by existing Graphical User
-Interface (GUI) APIs: a widget is a self-contained class which
-encapsulates all event handling related to a user interface
-element. The library offers an abstraction of many web-specific
-implementation details, including event handling and graphics
-support. In this way, the library chooses a rendering strategy based on
-the browser's capabilities (AJAX or plain HTML). Still, the library
-supports the web semantics of URLs, bookmarks, and forward/backward
-navigation and therefore also search engine interoperability.
+* API
+  ** widget-centric
+  ** -- inspired by -- existing Graphical User Interface (GUI) APIs
+    *** widget == self-contained class / encapsulates ALL event handling -- related to a -- UI
+element
 
 == Library overview
 
 === Widgets
 
-The {jwt-javadoc}WWidget.html[`+WWidget+`] class represents a widget,
-which provides an abstraction of a visual entity. The entire
-user interface is specified by creating a hierarchical structure of
-widgets, rooted at
-{jwt-javadoc}WApplication.html#getRoot()[`+WApplication.getRoot()+`]. By
-reacting to events related to these widgets, you can perform business
-logic, and manipulate the widget hierarchy to update the user
-interface.
-
-Any descendent class of {jwt-javadoc}WWidget.html[`+WWidget+`] is a
-self-contained (reusable) class that encapsulates both the look and
-behavior, enabling the design of the user interface in an orthogonal
-way.
+* `WWidget`
+  ** class / -- represents a -- widget
+* ANY descendent class of `WWidget`
+  ** == self-contained (reusable) class / encapsulates
+    *** look and
+    *** behavior
+* UI == hierarchical structure of widgets / rooted | `WContainerWidget`
+* if you react to events / -- related to -- these widgets -> you can
+  ** perform business logic
+  ** manipulate the widget hierarchy
 
 ==== Layout
 
 Widgets are layed out (with a few exceptions) following their
-hierarchical structure. You have two main options for the layout of
-children within a container. Either you use a CSS based layout, in
+hierarchical structure.
+You have two main options for the layout of
+children within a container.
+Either you use a CSS based layout, in
 which case the CSS style properties of the container and children
 together determine the result: each child manages its layout with
 respect to its sibling following a (rather complex) set of
-rules. Alternatively, JWt provides layout managers that may be used
+rules.
+Alternatively, JWt provides layout managers that may be used
 for layout.
 
-CSS layout considers two important categories of layout. Text-like
+CSS layout considers two important categories of layout.
+Text-like
 widgets ({jwt-javadoc}WWidget.html#setInline(boolean)[inline]) flow
 with sibling inline widgets in lines, wrapping at the right edge of
-the parent container. In contrast, widgets displayed as a
+the parent container.
+In contrast, widgets displayed as a
 {jwt-javadoc}WWidget.html#setInline(boolean)[block] stack vertically
-with respect to sibling widgets. Block widgets allow more control over
+with respect to sibling widgets.
+Block widgets allow more control over
 their position and size than inline widgets, and may also float to the
 left or right border of the parent container.
 
@@ -97,21 +102,20 @@ constructor. You may also add a widget to a container using a
 
 === Application URL(s)
 
-A JWt application, like any other servlet, is deployed at a specific
-location (URL) within your servlet container.
-This location is configured through the `+url-pattern+` defined
-in the `+servlet-mapping+` within your `+web.xml+` deployment descriptor,
-and the context at which the application is deployed. In this mode, a
-JWt application is a single page web application: the URL does not
-change.
+* JWt application
+  ** -- is deployed -- | your servlet container's specific location (URL)
+    *** Reason: 🧠== ANY OTHER servlet 🧠
+    *** -- configured through the --
+      **** `+web.xml+`'s `+servlet-mapping+`'s `+url-pattern+`
+      **** context | application is deployed
+  ** == 1! page web application / URL does NOT change
+  ** can manage internal paths -- by the -- servlet
+    *** == URLs | YOUR application URL
+    *** -- via -- `WApplication.setInternalPath()` & `WApplication.getInternalPath()`
+    *** requirements
+      **** set an `+url-pattern+` / ends with `+"/*"+`
 
-A JWt application may also manage internal paths, which are URLs
-_inside_ your application URL. To allow the servlet to handle all
-internal paths too, you need to set an `+url-pattern+` that ends with
-`+"/*"+`. Then, the internal path may be set and read using
-{jwt-javadoc}WApplication.html#setInternalPath(java.lang.String)[`+WApplication.setInternalPath()+`]
-and
-{jwt-javadoc}WApplication.html#getInternalPath()[`+WApplication.getInternalPath()+`]. When
+When
 the internal path changes, this is reflected in the browser URL and an
 entry is added to the browser history, allowing the user to use the
 back and forward buttons to navigate through your application.
@@ -415,13 +419,13 @@ method.
 [[getting-started]]
 == Getting started
 
-In this section, we will go through the steps to download and install
-JWt, and deploy and run the examples that come bundled with it. We
-will detail the procedure for the ubiquitous "Hello world" example,
-but you can follow the same steps for each of the examples.
+* goal
+  ** download & install JWt
+  ** deploy & run the examples / -- come bundled with -- it
 
 [TIP]
 ====
+* TODO:
 The examples that come with the library are each a self-contained project
 that only requires the JWt library (and its dependencies) to get
 going. You could structure your own projects in the same way as each
